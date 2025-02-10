@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
-const COLORS = ["#0088FE", "#00C49F"];
+const COLORS = ["#d5c7aa", "#00C49F"];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -61,7 +61,7 @@ export default function DiskContent() {
 
       {/* Дополнительные блоки */}
       <Box sx={{ marginTop: 2 }}>
-        <Box sx={{display: 'flex'}}><Box sx={{height: '10px', width: '10px', backgroundColor:"#0088FE", marginTop: 0.8, marginLeft: 20, marginRight: 0.5}}></Box><Typography>Using space</Typography></Box>
+        <Box sx={{display: 'flex'}}><Box sx={{height: '10px', width: '10px', backgroundColor:"#d5c7aa", marginTop: 0.8, marginLeft: 20, marginRight: 0.5}}></Box><Typography>Used space</Typography></Box>
         <Box sx={{display: 'flex'}}><Box sx={{height: '10px', width: '10px', backgroundColor:"#00C49F", marginTop: 0.8, marginLeft: 20, marginRight: 0.5}}></Box><Typography>Free space</Typography></Box>
       </Box>
     </Box>
