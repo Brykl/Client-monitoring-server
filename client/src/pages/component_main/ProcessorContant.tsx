@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { AreaChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Area, Legend, ResponsiveContainer } from 'recharts';
 
 
 
@@ -8,10 +8,10 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 const ProcessorContent = () => {
 
     const getStartedTime = new Date();
-    const formatedTime = getStartedTime.getHours() + ':' + getStartedTime.getMinutes() + ':' + getStartedTime.getSeconds();
+    const formatedTime = getStartedTime.getHours() + ':' + (getStartedTime.getMinutes() < 10 ? "0" + getStartedTime.getMinutes(): getStartedTime.getMinutes()) + ':' + (getStartedTime.getSeconds() < 10 ? "0" + getStartedTime.getSeconds(): getStartedTime.getSeconds());
 
     const [data, setData] = useState([
-        { name: formatedTime, value: 0 },
+        { time: formatedTime, load: 0 },
     ]);
     
     useEffect(() => {
@@ -19,10 +19,10 @@ const ProcessorContent = () => {
         console.log(formatedTime)
         const interval = setInterval(() => {
             const getNewTime = new Date();
-    const formatedTime = getNewTime.getHours() + ':' + getNewTime.getMinutes() + ':' + getNewTime.getSeconds();
+    const formatedTime = getNewTime.getHours() + ':' + (getNewTime.getMinutes() < 10 ? "0" + getNewTime.getMinutes(): getNewTime.getMinutes()) + ':' + (getNewTime.getSeconds() < 10 ? "0" + getNewTime.getSeconds(): getNewTime.getSeconds());
             setData((prevData) => [
                 ...prevData,
-                { name: `${formatedTime}`, value: Math.random() * 100 },
+                { time: `${formatedTime}`, load: Math.random() * 100 },
             ]);
         }, 5000);
     
@@ -30,13 +30,23 @@ const ProcessorContent = () => {
     }, []);
 
     const processorChart = (
-        <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-    <Line type="monotone" dataKey="value" stroke="#d5c7aa" />
-    <CartesianGrid  stroke="#ffff" strokeDasharray="20 20" />
-    <XAxis dataKey="name" tick={{fill: '#ffff'}}/>
-    <YAxis tick={{fill: '#ffff'}}/>
-    <Tooltip />
-  </LineChart>
+        <AreaChart
+      width={700}
+      height={400}
+      data={data}
+      margin={{
+        top: 10,
+        right: 30,
+        left: 0,
+        bottom: 0,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="time" />
+      <YAxis />
+      <Tooltip />
+      <Area type="monotone" dataKey="load" stroke="#8884d8" fill="#8884d8" />
+    </AreaChart>
     )
     
     return (
