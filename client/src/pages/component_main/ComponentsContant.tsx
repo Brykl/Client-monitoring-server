@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import ProcessorContent from "./ProcessorContant";
 
 interface ContantProps {
     barName: 'Processor'| 'Disk' | 'GPU';
@@ -7,7 +8,6 @@ interface ContantProps {
 const ComponentsContant: React.FC<ContantProps> = ({ barName })  => {
     let contantName: 'Processor'| 'Disk' | 'GPU';
 
-    const ProcessorComponent = () => <div>Processor Component</div>;
     const DiskComponent = () => <div>Disk Component</div>;
     const GPUComponent = () => <div>GPU Component</div>;
 
@@ -15,7 +15,7 @@ const ComponentsContant: React.FC<ContantProps> = ({ barName })  => {
 
     switch (barName) {
         case "Processor":
-                componentToRender = <ProcessorComponent/>
+                componentToRender = <ProcessorContent />
                 break;
         case "Disk":
                 componentToRender = <DiskComponent/>
