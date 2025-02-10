@@ -4,6 +4,7 @@ import InfoServerData from '../component_main/dataserver';
 import '../../css/mainPage.css'
 import ComponentBar from '../component_main/componetsBar';
 import { useEffect, useState } from 'react';
+import ComponentsContant from '../component_main/ComponentsContant';
 
 type barStatusType = "Processor" | "Disk" | "GPU"
 
@@ -91,6 +92,7 @@ export default function MainSpace() {
                             onClick={ () => setBarStatus("GPU")}
                             status={barStatus == "GPU" ? true : false} content='GPU' />
                     </Box>
+                    <ComponentsContant barName={barStatus}/>
                 </Box>
             </Box>
         </Box>
