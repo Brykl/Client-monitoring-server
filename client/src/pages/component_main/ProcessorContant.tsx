@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AreaChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Area, Legend, ResponsiveContainer } from 'recharts';
 
@@ -22,9 +22,9 @@ const ProcessorContent = () => {
     const formatedTime = getNewTime.getHours() + ':' + (getNewTime.getMinutes() < 10 ? "0" + getNewTime.getMinutes(): getNewTime.getMinutes()) + ':' + (getNewTime.getSeconds() < 10 ? "0" + getNewTime.getSeconds(): getNewTime.getSeconds());
             setData((prevData) => [
                 ...prevData,
-                { time: `${formatedTime}`, load: Math.random() * 100 },
+                { time: formatedTime, load: Math.floor( Math.random() * 100)  },
             ]);
-        }, 5000);
+        }, 3000);
     
         return () => clearInterval(interval); 
     }, []);
@@ -32,7 +32,7 @@ const ProcessorContent = () => {
     const processorChart = (
         <AreaChart
       width={700}
-      height={400}
+      height={300}
       data={data}
       margin={{
         top: 10,
@@ -42,16 +42,17 @@ const ProcessorContent = () => {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="time" />
-      <YAxis />
+      <XAxis dataKey="time" tick={{ fill: "#ffff" }}/>
+      <YAxis tick={{ fill: "#ffff" }}/>
       <Tooltip />
-      <Area type="monotone" dataKey="load" stroke="#8884d8" fill="#8884d8" />
+      <Area type="monotone" dataKey="load" stroke="#d8ccb5" fill="#d8ccb5" />
     </AreaChart>
     )
     
     return (
         <>
-        <Box sx={{height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 4}}>
+        <Box sx={{height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: 4}}>
+            <Typography variant="h5">CPU load</Typography>
             <Box>
                 {processorChart}
             </Box>
