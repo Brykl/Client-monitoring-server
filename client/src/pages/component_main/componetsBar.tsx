@@ -5,9 +5,10 @@ import { Box } from "@mui/material";
 interface MyComponentsProps {
     status: boolean;
     content: string;
+    onClick: () => void;
 }
 
-const ComponentBar: React.FC<MyComponentsProps> = ({ status, content}) => {
+const ComponentBar: React.FC<MyComponentsProps> = ({ status, content, onClick}) => {
 
     let color: string = '#d5c7aa';
     let colorText: string = '#596146';
@@ -22,7 +23,9 @@ const ComponentBar: React.FC<MyComponentsProps> = ({ status, content}) => {
     
     return (
         <>
-            <Box sx={{bgcolor: color, flexGrow: 1, display: 'flex',
+            <Box
+            onClick={onClick}
+            sx={{bgcolor: color, flexGrow: 1, display: 'flex',
                  justifyContent: 'center', alignItems: 'center', color: colorText, fontSize: '20px',
                  '&:hover': {
                     bgcolor: colorHover
