@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { AreaChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Area, Legend, ResponsiveContainer } from 'recharts';
+import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
 
 

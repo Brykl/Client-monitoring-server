@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
 const COLORS = ["#d5c7aa", "#00C49F"];
@@ -31,10 +30,11 @@ const renderCustomizedLabel = ({
 };
 
 export default function DiskContent() {
-  const [data, setData] = useState([
+  const data = [
     { name: "free", value: 600 },
     { name: "fulled", value: 400 },
-  ]);
+  ]
+    
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center",  width: "50%", padding: 2 }}>
@@ -52,7 +52,7 @@ export default function DiskContent() {
             fill="#8884d8"
             dataKey="value"
           >
-            {data.map((entry, index) => (
+            {data.map((index: any) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
