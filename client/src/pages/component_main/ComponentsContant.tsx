@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import ProcessorContent from "./ProcessorContant";
 import DiskContent from "./DiskContent";
+import GPUContent from "./GPUContent";
 
 interface ContantProps {
     barName: 'Processor'| 'Disk' | 'GPU';
@@ -8,7 +9,6 @@ interface ContantProps {
 
 const ComponentsContant: React.FC<ContantProps> = ({ barName })  => {
 
-    const GPUComponent = () => <div>GPU Component</div>;
 
     let componentToRender;
 
@@ -20,7 +20,7 @@ const ComponentsContant: React.FC<ContantProps> = ({ barName })  => {
                 componentToRender = <DiskContent/>
                 break;
         case "GPU":
-                componentToRender = <GPUComponent/>
+                componentToRender = <GPUContent/>
                 break;
         default:
                 componentToRender = null;
