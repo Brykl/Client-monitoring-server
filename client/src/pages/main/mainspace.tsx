@@ -3,11 +3,18 @@ import DenseAppBar from '../component_main/appbar';
 import InfoServerData from '../component_main/dataserver';
 import '../../css/mainPage.css'
 import ComponentBar from '../component_main/componetsBar';
+import { useEffect, useState } from 'react';
 
+type barStatusType = "Processor" | "Disk" | "GPU"
 
 export default function MainSpace() {
+    const [barStatus, setBarStatus] = useState<barStatusType>("Processor")
     const dataFromServer = InfoServerData();
     console.log(dataFromServer);
+
+    useEffect (() => {
+
+    }, )
 
 
     if (!dataFromServer) {
@@ -45,7 +52,7 @@ export default function MainSpace() {
                             <Typography className='text-information'> {dataFromServer.platform} </Typography> 
                         </Box>
                                 <Typography className='text-card' sx={{ fontSize: '20px'}}>Processor:</Typography> 
-                                <Typography className='text-information'> {dataFromServer.procInfo[0]?.model} </Typography>
+                                <Typography className='text-information'> {dataFromServer.procInfo} </Typography>
                         <Box>
                             <Typography className='text-card'sx={{ fontSize: '20px'}}>Architecture:</Typography> 
                             <Typography className='text-information'> {dataFromServer.arch} </Typography>
@@ -74,9 +81,15 @@ export default function MainSpace() {
                         borderRadius: '12px 12px 0 0',
                         display: 'flex', justifyContent: 'space-between'
                     }}>
-                            <ComponentBar status={true} content='Processor'/>
-                            <ComponentBar status={false} content='Disk'/>
-                            <ComponentBar status={false} content='GPU'/>
+                            <ComponentBar status={barStatus == "Processor" ? true : false} content='Processor'
+                            onClick={ () => setBarStatus("Processor")}
+                            />
+                            <ComponentBar
+                            onClick={ () => setBarStatus("Disk")}
+                            status={barStatus == "Disk" ? true : false} content='Disk'/>
+                            <ComponentBar
+                            onClick={ () => setBarStatus("GPU")}
+                            status={barStatus == "GPU" ? true : false} content='GPU' />
                     </Box>
                 </Box>
             </Box>
