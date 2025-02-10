@@ -52,13 +52,13 @@ export default function DiskContent() {
             fill="#8884d8"
             dataKey="value"
           >
-            {data.map((index: any) => (
+            {data.map((_empty ,index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
         </PieChart>
       </Box>
-
+      
       {/* Дополнительные блоки */}
       <Box sx={{ marginTop: 2 }}>
         <Box sx={{display: 'flex'}}><Box sx={{height: '10px', width: '10px', backgroundColor:"#d5c7aa", marginTop: 0.8, marginLeft: 20, marginRight: 0.5}}></Box><Typography>Used space</Typography></Box>
