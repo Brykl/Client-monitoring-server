@@ -24,7 +24,7 @@ const ProcessorContent = () => {
                 ...prevData,
                 { time: `${formatedTime}`, load: Math.random() * 100 },
             ]);
-        }, 5000);
+        }, 3000);
     
         return () => clearInterval(interval); 
     }, []);
@@ -45,7 +45,7 @@ const ProcessorContent = () => {
       <XAxis dataKey="time" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="load" stroke="#8884d8" fill="#8884d8" />
+      <Area type="monotone" dataKey="load" stroke="#d8ccb5" fill="#d8ccb5" />
     </AreaChart>
     )
     

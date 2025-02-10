@@ -9,7 +9,7 @@ export default function DenseAppBar() {
       <AppBar position="static" sx={{bgcolor: '#66754c'}}>
         <Toolbar variant="dense" sx={{ justifyContent: 'center' }}>
           <Typography variant="h5" color="#cccccc" component="div" >
-            Server Monitoring
+            Desktop Monitoring
           </Typography>
         </Toolbar>
       </AppBar>
