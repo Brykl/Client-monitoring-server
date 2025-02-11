@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
 
-
+ 
     
 const ProcessorContent = () => {
 
@@ -15,8 +15,6 @@ const ProcessorContent = () => {
     ]);
     
     useEffect(() => {
-        
-        console.log(formatedTime)
         const interval = setInterval(() => {
             const getNewTime = new Date();
     const formatedTime = getNewTime.getHours() + ':' + (getNewTime.getMinutes() < 10 ? "0" + getNewTime.getMinutes(): getNewTime.getMinutes()) + ':' + (getNewTime.getSeconds() < 10 ? "0" + getNewTime.getSeconds(): getNewTime.getSeconds());

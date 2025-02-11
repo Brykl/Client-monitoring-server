@@ -1,46 +1,49 @@
+import { useEffect, useState } from "react";
+import DataFromServer from "../../services/ServerInfo/DataAboutServer";
 
-// import axios from 'axios'
-// import { useEffect, useState } from 'react';
+export default function InfoServerData() {
+  const [serverInfo, setServerInfo] = useState(null);
+  const [currentTime, setCurrentTime] = useState("");
 
-export default function InfoServerData () {
-
-    // const [dataFromServer, setDataFromServer] = useState()
-
-    // useEffect(() => {
-    //     axios.get("http://127.0.0.1:3000/info")
-    //       .then(response => {
-    //         setDataFromServer(response.data)
-    //         console.log(response.data);
-    //       })
-    //       .catch(error => {
-    //         console.error('Error fetching data:', error);
-    //       });
-    //   }, [])
-
-
-    //   if (!dataFromServer) {
-    //     return null;  // Или можно вернуть пустой объект: {}
-    // }
-    //   const dfs = dataFromServer;
-      
-      return {
-        platform: "linux",
-        arch: "x64 bit",
-        allMem: "8",
-        freeMem: "4.5",
-        homDir: "/etc/home",
-        netInfo: "192.168.1.205",
-        procInfo: "Ryzen 5 5500x",
-        time: "11:11",
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await DataFromServer();
+      setServerInfo(data);
     };
-    //   return {
-    //     platform: dataFromServer.plat,
-    //     arch: dataFromServer.arch,
-    //     allMem: dataFromServer.allMem,
-    //     freeMem: dataFromServer.freeMem,
-    //     homDir: dataFromServer.homDir,
-    //     netInfo: dataFromServer.netInfo,
-    //     procInfo: dataFromServer.procInfo,
-    //     time: dataFromServer.time,
-    // };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log(serverInfo);
+  }, [serverInfo]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const formattedTime =
+        now.getHours() +
+        ":" +
+        String(now.getMinutes()).padStart(2, "0") +
+        ":" +
+        String(now.getSeconds()).padStart(2, "0");
+
+      setCurrentTime(formattedTime);
+    }, 1000);
+
+    return () => clearInterval(interval); // Очищаем таймер при размонтировании
+  }, []);
+
+  if (!serverInfo) return null; // Проверка перенесена после объявления стейтов
+
+  return {
+    platform: serverInfo?.data?.platform,
+    arch: serverInfo?.data?.arch,
+    allMem: (serverInfo?.data?.memory?.total / 1024 / 1024 / 1024).toFixed(2),
+    freeMem: (serverInfo?.data?.memory?.free / 1024 / 1024 / 1024).toFixed(2),
+    homDir: serverInfo?.data?.maindir,
+    netInfo: serverInfo?.data?.network?.address,
+    procInfo: serverInfo?.data?.cpu?.[0]?.model, // Добавил `?.[]`, чтобы избежать ошибки, если `cpu` нет
+    time: currentTime, // Теперь обновляется корректно
+  };
 }

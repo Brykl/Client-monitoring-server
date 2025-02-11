@@ -66,6 +66,10 @@ export default function MainSpace() {
                             <Typography className='text-card' sx={{ fontSize: '20px'}}>Memory:</Typography>
                             <Typography className='text-information'> {dataFromServer.allMem} GB </Typography> 
                         </Box>
+                        <Box>
+                            <Typography className='text-card' sx={{ fontSize: '20px'}}>Server's Time:</Typography>
+                            <Typography className='text-information'> {dataFromServer.time} </Typography> 
+                        </Box>
                     </Box>
                 </Box>
                 <Box sx={{
